@@ -1,18 +1,17 @@
 public import Complex
 public import Dimension
-public import Real
+public import Numeric
 public import Tagged
 
-extension Complex.Number.Polar where Scalar: BinaryFloatingPoint & Numeric.Transcendental {
+extension Tagged
+where Tag == Complex.Number<Underlying>.Phase,
+    Underlying: BinaryFloatingPoint & Numeric.Transcendental
+{
 
+    /// The complex phase expressed as a dimensioned radian value.
     @inlinable
-    public static func phase(of z: Complex.Number<Scalar>) -> Radian<Scalar> {
-        Radian(_unchecked: Scalar._atan2(z.imaginary._value, z.real._value))
-    }
-
-    @inlinable
-    public var phase: Radian<Scalar> {
-        Self.phase(of: complex)
+    public var radians: Radian<Underlying> {
+        Radian(_unchecked: underlying)
     }
 }
 
