@@ -23,7 +23,7 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-atoms/swift-dimension.git",
+            url: "https://github.com/swift-atoms/swift-spatial.git",
             branch: "main"
         ),
         .package(
@@ -40,7 +40,7 @@ let package = Package(
             name: "Complex Dimension",
             dependencies: [
                 .product(name: "Complex", package: "swift-complex"),
-                .product(name: "Dimension", package: "swift-dimension"),
+                .product(name: "Spatial", package: "swift-spatial"),
                 .product(name: "Numeric", package: "swift-numeric"),
                 .product(name: "Tagged", package: "swift-tagged"),
             ]
@@ -50,9 +50,8 @@ let package = Package(
             dependencies: [
                 "Complex Dimension",
                 .product(name: "Complex", package: "swift-complex"),
-                .product(name: "Dimension", package: "swift-dimension"),
+                .product(name: "Spatial", package: "swift-spatial"),
                 .product(name: "Numeric", package: "swift-numeric"),
-                .product(name: "Numeric Standard Library Integration", package: "swift-numeric"),
                 .product(name: "Tagged", package: "swift-tagged"),
             ]
         ),
