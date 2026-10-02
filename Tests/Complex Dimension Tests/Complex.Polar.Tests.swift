@@ -1,8 +1,7 @@
 import Complex
 import Complex_Dimension
-import Dimension
+import Angle
 import Numeric
-import Numeric_Standard_Library_Integration
 import Tagged
 import Testing
 
@@ -13,23 +12,23 @@ struct ComplexPolarTests {
     func phase() {
 
         let z1 = Complex.Number(1.0, 1.0)
-        let phase1 = z1.polar.phase.radians
-        #expect(phase1.underlying.equals.approximate(Double.pi / 4, tolerance: 1e-10))
+        let phase1 = z1.polar.phase
+        #expect(abs(phase1.underlying - (Double.pi / 4)) < 1e-10)
 
         let z2 = Complex.Number(1.0, 0.0)
-        let phase2 = z2.polar.phase.radians
-        #expect(phase2.underlying.equals.approximate(0.0, tolerance: 1e-15))
+        let phase2 = z2.polar.phase
+        #expect(abs(phase2.underlying - (0.0)) < 1e-15)
 
         let z3 = Complex.Number(0.0, 1.0)
-        let phase3 = z3.polar.phase.radians
-        #expect(phase3.underlying.equals.approximate(Double.pi / 2, tolerance: 1e-10))
+        let phase3 = z3.polar.phase
+        #expect(abs(phase3.underlying - (Double.pi / 2)) < 1e-10)
     }
 
     @Test
     func phaseStatic() {
         let z = Complex.Number(1.0, 1.0)
-        let phase = Complex.Number.Polar.phase(of: z).radians
-        #expect(phase.underlying.equals.approximate(Double.pi / 4, tolerance: 1e-10))
+        let phase = Complex.Number.Polar.phase(of: z)
+        #expect(abs(phase.underlying - (Double.pi / 4)) < 1e-10)
     }
 
     @Test
@@ -48,7 +47,7 @@ struct ComplexPolarTests {
     func polarRoundTrip() {
         let original = Complex.Number(3.0, 4.0)
         let length = original.polar.length
-        let phase = original.polar.phase.radians
+        let phase = original.polar.phase
 
         let reconstructed = Complex.Number(length: length, phase: phase)
         #expect(reconstructed.real.equals.approximate(original.real, tolerance: 1e-10))
