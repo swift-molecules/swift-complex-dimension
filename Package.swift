@@ -48,7 +48,7 @@ let package = Package(
         .testTarget(
             name: "Complex Dimension Tests",
             dependencies: [
-                "Complex Dimension",
+                .target(name: "Complex Dimension"),
                 .product(name: "Complex", package: "swift-complex"),
                 .product(name: "Angle", package: "swift-angle"),
                 .product(name: "Numeric", package: "swift-numeric"),
@@ -60,17 +60,14 @@ let package = Package(
 )
 
 for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    let ecosystem: [SwiftSetting] = [
+    target.swiftSettings = (target.swiftSettings ?? []) + [
         .strictMemorySafety(),
         .enableUpcomingFeature("ExistentialAny"),
         .enableUpcomingFeature("InternalImportsByDefault"),
         .enableUpcomingFeature("MemberImportVisibility"),
         .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-        .enableExperimentalFeature("Lifetimes"),
         .enableUpcomingFeature("InferIsolatedConformances"),
+        .enableExperimentalFeature("Lifetimes"),
+        .treatAllWarnings(as: .error),
     ]
-
-    let package: [SwiftSetting] = []
-
-    target.swiftSettings = (target.swiftSettings ?? []) + ecosystem + package
 }
