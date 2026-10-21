@@ -1,6 +1,6 @@
+import Angle
 import Complex
 import Complex_Dimension
-import Angle
 import Numeric
 import Tagged
 import Testing
